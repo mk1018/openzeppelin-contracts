@@ -9,6 +9,7 @@ import "./extensions/IERC1155MetadataURI.sol";
 import "../../utils/Address.sol";
 import "../../utils/Context.sol";
 import "../../utils/introspection/ERC165.sol";
+import "../../utils/Strings.sol";
 
 /**
  * @dev Implementation of the basic standard multi-token.
@@ -58,6 +59,10 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      */
     function uri(uint256) public view virtual override returns (string memory) {
         return _uri;
+    }
+
+    function url(uint256 tokenID) public view virtual returns (string memory) {
+        return Strings.strConnect(uri(tokenID), Strings.toString(tokenID));
     }
 
     /**
